@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title',25);
             $table->text('content');
             $table->foreignId('category_id')->constrained('categories');
-            $table->integer('author_id')->unsigned();  // sqlite ksoone vaveyla
+            $table->integer('author_id')->unsigned();  // sqlite limits
             $table->foreign('author_id')->references('id')->on('users');
             $table->text('tags');
             $table->string('status',10);

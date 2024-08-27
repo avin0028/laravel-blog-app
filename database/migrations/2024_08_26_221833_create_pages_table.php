@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('title',25);
             $table->text('content');
             $table->string('status',10);
-            $table->integer('author')->unsigned();  // sqlite ksoone vaveyla
-
+            $table->integer('author')->unsigned();  // sqlite limitss
             $table->foreign('author')->references('id')->on('users');
         });
     }
