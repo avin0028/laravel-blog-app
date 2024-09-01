@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    // protected function getDefaultGuardName(): string { return 'web'; }
+
     /**
      * The attributes that should be hidden for serialization.
      *

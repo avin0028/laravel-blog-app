@@ -30,9 +30,9 @@
 
         {{-- role --}}
       <div class="text-white">
-        <input type="radio" :value="__('role')" name="role"  value="writer" {{ $selectedRole == 'writer' ? 'checked' : '' }}> <label>Writer</label>
-        <input type="radio" :value="__('role')" name="role" value="editor" {{ $selectedRole == 'editor' ? 'checked' : '' }}> <label>Editor</label>
-        <input type="radio" :value="__('role')" name="role" value="viewer" {{ $selectedRole == 'viewer' ? 'checked' : '' }}> <label>Viewer</label>
+        <input type="radio"  name="role"  value="writer" {{ $selectedRole == 'writer' ? 'checked' : '' }}> <label>Writer</label>
+        <input type="radio"  name="role" value="editor" {{ $selectedRole == 'editor' ? 'checked' : '' }}> <label>Editor</label>
+        <input type="radio"  name="role" value="viewer" {{ $selectedRole == 'viewer' ? 'checked' : '' }}> <label>Viewer</label>
 
       </div>
 

@@ -3,6 +3,9 @@
 use App\Http\Controllers\admin\RegisteruserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostsController;
+
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,10 +20,15 @@ Route::prefix('admin')->group(function () {
 
 })->middleware(['role:admin','auth']);
 
-
-Route::get('/dashboard', function () {
+Route::prefix('dashboard')->group(function (){
+Route::get('/', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
+
+Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|editor|writer')->name('newpost.show');
+Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer'])->name('newpost.store');
+
+})->middleware('auth');
 
 
 Route::middleware('auth')->group(function () {
