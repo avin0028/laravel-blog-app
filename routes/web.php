@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\RegisteruserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostsController;
 
@@ -11,6 +12,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix('api')->group(function () { 
+
+        Route::get('/getcategories',[CategoryController::class,'getall']);
+    });
+
+
 Route::prefix('admin')->group(function () {
     Route::get('/register',[RegisteredUserController::class, 'create'])->name('adminregister');
     Route::post('/register',[RegisteredUserController::class, 'store'])->name('adminregister.store');
