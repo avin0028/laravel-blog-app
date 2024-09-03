@@ -17,7 +17,6 @@ Route::prefix('api')->group(function () {
         Route::get('/getcategories',[CategoryController::class,'getall']);
     });
 
-
 Route::prefix('admin')->group(function () {
     Route::get('/register',[RegisteredUserController::class, 'create'])->name('adminregister');
     Route::post('/register',[RegisteredUserController::class, 'store'])->name('adminregister.store');
@@ -32,10 +31,11 @@ Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|editor|writer')->name('newpost.show');
-Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer'])->name('newpost.store');
+Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|editor|writer','auth')->name('newpost.show');
+Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer','auth'])->name('newpost.store');
 
-})->middleware('auth');
+});
+Route::get('posts/{url}',[PostsController::class,'showpost']);
 
 
 Route::middleware('auth')->group(function () {

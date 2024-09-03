@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "title",
+        'content',
+        'tags',
+        'author',
+        'category',
+        'status',
+        'url'
+    ];
+
 
     public function comments()
     {
