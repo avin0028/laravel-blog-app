@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log; 
@@ -21,7 +22,8 @@ class PostsController extends Controller
         return view('ShowPost',compact('post'));
     }
     
-    public function store(Request $request){
+    public function store(Request $request) : RedirectResponse
+    {
 
 
         $request->validate([
@@ -43,18 +45,8 @@ class PostsController extends Controller
         $post->status = $request->status;
         $post->url = $request->url;
         $post->save();
+        return redirect()->route('showpost', ['url' => $request->url]);
 
-        // Post::create(
-        //     [
-        //         'author_id' => $author,
-        //         'title' => $request->title,
-        //         'content'=> $request->content,
-        //         'category_id' => $request->category,
-        //         'tags' => $request->tags,
-        //         'status' => $request->status,
-        //         'url' => $request->url
-        //     ]
-        //     );
     }
 
 
