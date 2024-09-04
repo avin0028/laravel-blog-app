@@ -33,7 +33,7 @@ class PostsController extends Controller
         return view('dashboard.editpost',compact('post'));
 
     }
-    
+
     public function editthepost(Request $request):RedirectResponse{
      Post::where('url',$request->url)->update([
             'title' => $request->title,
@@ -71,7 +71,7 @@ class PostsController extends Controller
 
     }
     public function showposts(Request $request){
-        $posts = Post::all();
+        $posts = Post::where('status','1')->get();
         return view('ShowPosts',compact('posts'));
 
     }
