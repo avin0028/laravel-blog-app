@@ -31,9 +31,9 @@
             </button>
         </div>
         <div>
-            <button  class="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-700">
+            <a href="{{Route('editpost',['url'=>$post[0]->url])}}"  class="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-700">
                Edit Post
-            </button>
+            </a>
         </div>
     </div>
 

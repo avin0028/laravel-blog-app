@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('newpost.show')" :active="request()->routeIs('newpost.show')">
                         {{ __('New Post') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('editpost')" :active="request()->routeIs('editpost')">
+                        {{ __('Edit Post') }}
+                    </x-nav-link>
                 </div>
             </div>
 

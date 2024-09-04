@@ -21,6 +21,11 @@ class PostsController extends Controller
         $post = Post::where('url',$url)->get();
         return view('ShowPost',compact('post'));
     }
+
+    public function editpost(){
+        return view('dashboard.editpost');
+
+    }
     
     public function store(Request $request) : RedirectResponse
     {
