@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('editpost')" :active="request()->routeIs('editpost')">
                         {{ __('Edit Post') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('managecats')" :active="request()->routeIs('managecats')">
+                        {{ __('Manage Categories') }}
+                    </x-nav-link>
                 </div>
             </div>
 

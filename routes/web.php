@@ -12,10 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-Route::prefix('api')->group(function () { 
 
-        Route::get('/getcategories',[CategoryController::class,'getall']);
-    });
 
 Route::prefix('admin')->group(function () {
     Route::get('/register',[RegisteredUserController::class, 'create'])->name('adminregister');
@@ -35,6 +32,9 @@ Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|e
 Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer','auth'])->name('newpost.store');
 Route::get('/editpost',[PostsController::class,'editpost'])->middleware(['role:admin|editor|writer','auth'])->name('editpost');
 Route::post('/editpost',[PostsController::class,'editthepost'])->middleware(['role:admin|editor|writer','auth'])->name('editpost.do');
+Route::get('/managecategories',[CategoryController::class,'show'])->middleware('role:admin|editor','auth')->name('managecats');
+Route::post('/managecategories',[CategoryController::class,'action'])->middleware('role:admin|editor','auth')->name('cataction');
+
 
 });
 Route::get('posts',[PostsController::class,'showposts'])->name('showposts');
