@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::prefix('api')->group(function () { 
 
         Route::get('/getcategories',[CategoryController::class,'getall']);
@@ -36,6 +36,8 @@ Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admi
 
 });
 Route::get('posts/{url}',[PostsController::class,'showpost'])->name('showpost');
+Route::post('posts/{url}',[PostsController::class,'delete'])->name('showpost.delete');
+
 
 
 Route::middleware('auth')->group(function () {

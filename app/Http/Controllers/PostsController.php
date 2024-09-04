@@ -49,5 +49,12 @@ class PostsController extends Controller
 
     }
 
+    public function delete(Request $request) : RedirectResponse
+    {
+       Post::where('url',$request->url)->delete();
+       return redirect()->route('home');
+
+    }
+
 
 }
