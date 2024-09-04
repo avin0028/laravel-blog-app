@@ -48,11 +48,16 @@ class PostsController extends Controller
         return redirect()->route('showpost', ['url' => $request->url]);
 
     }
+    public function showposts(Request $request){
+        $posts = Post::all();
+        return view('ShowPosts',compact('posts'));
+
+    }
 
     public function delete(Request $request) : RedirectResponse
     {
        Post::where('url',$request->url)->delete();
-       return redirect()->route('home');
+       return redirect()->route('showposts');
 
     }
 

@@ -41,7 +41,7 @@
     <div x-show="open" class="fixed inset-0 flex items-center justify-center z-50" style="display: none;">
         <div class="fixed inset-0 bg-black opacity-50" @click="open = false"></div>
         <div class="bg-white rounded-lg overflow-hidden shadow-lg z-10 w-1/3">
-       
+          
             <form action="{{ route('showpost.delete', ['url' => request()->route('url')]) }}" method="POST" class="p-4">
                 @csrf
               <h4>Are you sure you want to delete this post?</h4>

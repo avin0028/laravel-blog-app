@@ -35,6 +35,7 @@ Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|e
 Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer','auth'])->name('newpost.store');
 
 });
+Route::get('posts',[PostsController::class,'showposts'])->name('showposts');
 Route::get('posts/{url}',[PostsController::class,'showpost'])->name('showpost');
 Route::post('posts/{url}',[PostsController::class,'delete'])->name('showpost.delete');
 
