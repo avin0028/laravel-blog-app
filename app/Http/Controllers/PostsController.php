@@ -34,6 +34,16 @@ class PostsController extends Controller
 
     }
     
+    public function editthepost(Request $request):RedirectResponse{
+     Post::where('url',$request->url)->update([
+            'title' => $request->title,
+            'content'=> $request->content,
+            'tags'=> $request->tags,
+            'status'=> $request->status
+        ]);
+        return redirect()->route('showpost', ['url' => $request->url]);
+    }
+    
     public function store(Request $request) : RedirectResponse
     {
 

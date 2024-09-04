@@ -20,7 +20,7 @@
         
     </form>
     @else 
-     <form class="flex-col flex justify-center " method="POST" action="{{ route('newpost.store') }}">
+     <form class="flex-col flex justify-center " method="POST" action="{{ route('editpost.do') }}">
         @csrf
         <div class="w-1/2">
             <x-input-label for="title" :value="__('Title')" />
@@ -33,6 +33,7 @@
             <x-text-input id="content" class="block mt-1 w-full h-20" type="text" name="content" value="{{$post[0]->content}}" required autofocus autocomplete="content" />
             <x-input-error :messages="$errors->get('content')" class="mt-2" />
         </div>
+        <input type="hidden" name="url" value="{{$post[0]->url}}"/>
   
         <div class="mt-4">
             <x-input-label for="tags" :value="__('Tags(seprate with commas(,) )')" />

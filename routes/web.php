@@ -34,6 +34,8 @@ Route::get('/', function () {
 Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|editor|writer','auth')->name('newpost.show');
 Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer','auth'])->name('newpost.store');
 Route::get('/editpost',[PostsController::class,'editpost'])->middleware(['role:admin|editor|writer','auth'])->name('editpost');
+Route::post('/editpost',[PostsController::class,'editthepost'])->middleware(['role:admin|editor|writer','auth'])->name('editpost.do');
+
 });
 Route::get('posts',[PostsController::class,'showposts'])->name('showposts');
 Route::get('posts/{url}',[PostsController::class,'showpost'])->name('showpost');
