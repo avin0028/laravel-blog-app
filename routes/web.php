@@ -36,11 +36,13 @@ Route::post('/managecategories',[CategoryController::class,'action'])->middlewar
 Route::get('/newpage',[PagesController::class,'show'])->middleware('role:editor|admin','auth')->name('newpage');
 Route::post('/newpage',[PagesController::class,'store'])->middleware('role:editor|admin','auth')->name('newpage.store');
 
-
 });
 Route::get('posts',[PostsController::class,'showposts'])->name('showposts');
 Route::get('posts/{url}',[PostsController::class,'showpost'])->name('showpost');
 Route::post('posts/{url}',[PostsController::class,'delete'])->name('showpost.delete');
+Route::get('pages/',[PagesController::class,'showpages'])->name('showpages');
+Route::get('pages/{url}',[PagesController::class,'showpage'])->name('showpage');
+Route::post('pages/{url}',[PagesController::class,'delete'])->name('showpage.delete');
 
 
 

@@ -29,5 +29,13 @@ class PagesController extends Controller{
        Page::where('url',$request->url)->delete();
        return redirect()->route('home');
     }
+    public function showpages(Request $request){
+        $posts = Page::where('status','1')->get();
+        return view('ShowPosts',compact('posts'));
+    }
+    public function showpage(String $url){
+        $page = Page::where('url',$url)->get();
+        return view('ShowPage',compact('page'));
+    }
     
 }
