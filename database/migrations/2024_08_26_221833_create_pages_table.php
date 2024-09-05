@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title',25);
+            $table->string('url',10);
             $table->text('content');
             $table->string('status',10);
             $table->integer('author')->unsigned();  // sqlite limits

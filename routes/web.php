@@ -5,8 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostsController;
-
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,6 +33,8 @@ Route::get('/editpost',[PostsController::class,'editpost'])->middleware(['role:a
 Route::post('/editpost',[PostsController::class,'editthepost'])->middleware(['role:admin|editor|writer','auth'])->name('editpost.do');
 Route::get('/managecategories',[CategoryController::class,'show'])->middleware('role:admin|editor','auth')->name('managecats');
 Route::post('/managecategories',[CategoryController::class,'action'])->middleware('role:admin|editor','auth')->name('cataction');
+Route::get('/newpage',[PagesController::class,'show'])->middleware('role:editor|admin','auth')->name('newpage');
+Route::post('/newpage',[PagesController::class,'store'])->middleware('role:editor|admin','auth')->name('newpage.store');
 
 
 });
