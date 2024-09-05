@@ -17,13 +17,20 @@
         }
     </style>
 </head>
-
+@php
+    $tags = explode(',',$post[0]->tags);
+@endphp
 <body x-data="{ open: false }"  class="color-darker flex items-center justify-center min-h-screen">
 
     <div class="color-dark max-w-lg w-full text-white shadow-md rounded-lg p-6">
         <h1 class="text-2xl font-bold text-dark mb-4">{{$post[0]->title}}</h1>
         <p class="text-base mb-4">{{$post[0]->content}}</p>
-        <p class="text-base">You can customize the colors and styles further as per your requirements.</p>
+        <div class="w-full flex mb-4	">
+            @foreach ($tags as $tag)
+          <div class="text-black ml-2 rounded-md bg-gray-400">{{$tag}}</div>
+                
+            @endforeach
+        </div>
         @hasrole('writer|editor|admin')
         <div>
             <button @click="open = true" class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700">
