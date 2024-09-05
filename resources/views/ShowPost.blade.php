@@ -59,38 +59,42 @@
         </div>
     </div>
 
-    <div class="color-dark max-w-lg w-full text-white shadow-md rounded-lg p-6 mt-6">
-        <h2 class="text-xl font-bold mb-4">Comments</h2>
-
-        <form action="{{ route('newcomment') }}" method="POST" class="mb-4">
-            @csrf
-            <input type="hidden" name="post_id" value="{{ $post[0]->id }}">
-            <textarea name="content" rows="3" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Add a comment..." required></textarea>
-            <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Comment</button>
-        </form>
-
-        @foreach ($comments as $comment)
-            <div class="border-b border-gray-600 mb-4 pb-2">
-                <p class="font-semibold">{{ $comment->user->name }}</p>
-                <p class="text-gray-300">{{ $comment->content }}</p>
-                
-                <form action="{{ route('newcomment') }}" method="POST" class="mt-2">
-                    @csrf
-                    <input type="hidden" name="post_id" value="{{ $post[0]->id }}">
-                    <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-                    <textarea name="body" rows="2" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Reply..." required></textarea>
-                    <button type="submit" class="mt-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Reply</button>
-                </form>
-
-                @foreach ($comment->replies as $reply)
-                    <div class="ml-4 border-l border-gray-600 pl-4 mt-2">
-                        <p class="font-semibold">{{ $reply->user->name }}</p>
-                        <p class="text-gray-300">{{ $reply->body }}</p>
-                    </div>
-                @endforeach
-            </div>
-        @endforeach
-    </div>
-
+   
 </body>
+<div class="color-dark max-w-lg w-full text-white shadow-md rounded-lg p-6 mt-6">
+    <h2 class="text-xl font-bold mb-4">Comments</h2>
+
+    <form action="{{ route('newcomment') }}" method="POST" class="mb-4">
+        @csrf
+        <input type="hidden" name="post_id" value="{{ $post[0]->id }}">
+        <textarea name="content" rows="2" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Add a comment..." required></textarea>
+        <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Comment</button>
+    </form>
+
+    @foreach ($comments as $comment)
+        <div class="border-b border-gray-600 mb-4 pb-2">
+            <p class="font-semibold">{{ $comment->user->name }}</p>
+            <p class="text-gray-300">{{ $comment->content }}</p>
+
+            <form action="{{ route('newcomment') }}" method="POST" class="mt-2">
+                @csrf
+                <input type="hidden" name="post_id" value="{{ $post[0]->id }}">
+                <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+                <textarea name="content" rows="1" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Reply..." required></textarea>
+                <button type="submit" class="mt-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Reply</button>
+            </form>
+
+          @if ($comment->replies->isNotEmpty())
+                <div class="ml-4 mt-2">
+                    @foreach ($comment->replies as $reply)
+                        <div class="border-b border-gray-600 mb-2 pb-2">
+                            <p class="font-semibold">{{ $reply->user->name }}</p>
+                            <p class="text-gray-300">{{ $reply->content }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            @endif 
+        </div>
+    @endforeach
+</div>
 </html>

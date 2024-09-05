@@ -18,7 +18,7 @@ class PostsController extends Controller
     }
     public function showpost(string $url){
         $post = Post::where('url',$url)->get();
-        $comments = Comment::where('post_id', $post[0]->id)->with('replies')->get();
+        $comments = Comment::whereNull('parent_id')->get();
         return view('ShowPost',compact('post','comments'));
     }
 
