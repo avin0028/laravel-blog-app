@@ -35,6 +35,8 @@ Route::get('/managecategories',[CategoryController::class,'show'])->middleware('
 Route::post('/managecategories',[CategoryController::class,'action'])->middleware('role:admin|editor','auth')->name('cataction');
 Route::get('/newpage',[PagesController::class,'show'])->middleware('role:editor|admin','auth')->name('newpage');
 Route::post('/newpage',[PagesController::class,'store'])->middleware('role:editor|admin','auth')->name('newpage.store');
+Route::get('/editpage',[PagesController::class,'editpage'])->middleware('role:editor|admin','auth')->name('editpage');
+Route::post('/editpage',[PagesController::class,'editthepage'])->middleware('role:editor|admin','auth')->name('editpage.do');
 
 });
 Route::get('posts',[PostsController::class,'showposts'])->name('showposts');

@@ -37,5 +37,17 @@ class PagesController extends Controller{
         $page = Page::where('url',$url)->get();
         return view('ShowPage',compact('page'));
     }
-    
+    public function editpage(Request $request){
+        $url = $request->query('url');
+        if(!$url){
+
+            return view('dashboard.editpage');
+        }
+        $page = Page::where('url',$url)->get();
+        // dd($post[0]);
+        return view('dashboard.editpage',compact('page'));
+    }
+    public function editthepage(Request $request){
+
+    }
 }
