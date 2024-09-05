@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\RegisteruserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PagesController;
@@ -45,7 +46,7 @@ Route::post('posts/{url}',[PostsController::class,'delete'])->name('showpost.del
 Route::get('pages/',[PagesController::class,'showpages'])->name('showpages');
 Route::get('pages/{url}',[PagesController::class,'showpage'])->name('showpage');
 Route::post('pages/{url}',[PagesController::class,'delete'])->name('showpage.delete');
-
+Route::post('comments',[CommentsController::class,'store'])->middleware('auth')->name('newcomment');
 
 
 Route::middleware('auth')->group(function () {
