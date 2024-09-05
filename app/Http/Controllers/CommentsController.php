@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 class CommentsController extends Controller
 {
 
-
-
+    
     public function store(Request $request){
     
         $request->validate([
@@ -21,6 +20,9 @@ class CommentsController extends Controller
         $comment = new Comment();
         $comment->content = $request->content;
         $comment->user_id = Auth::id();
+        $comment->post_id = $request->post_id;
+        $comment->status = 0;
+        $comment->save();
 
         return redirect()->back();
 

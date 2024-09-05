@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class PostsController extends Controller
     }
     public function showpost(string $url){
         $post = Post::where('url',$url)->get();
-        return view('ShowPost',compact('post'));
+        $comments = Comment::where('post_id', $post[0]->id)->with('replies')->get();
+        return view('ShowPost',compact('post','comments'));
     }
 
     public function editpost(Request $request){

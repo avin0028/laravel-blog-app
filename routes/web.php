@@ -48,7 +48,6 @@ Route::get('pages/{url}',[PagesController::class,'showpage'])->name('showpage');
 Route::post('pages/{url}',[PagesController::class,'delete'])->name('showpage.delete');
 Route::post('comments',[CommentsController::class,'store'])->middleware('auth')->name('newcomment');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
