@@ -18,7 +18,8 @@ class PostsController extends Controller
     }
     public function showpost(string $url){
         $post = Post::where('url',$url)->get();
-        $comments = Comment::whereNull('parent_id')->get();
+        //prevent showing replies as comments by adding whereNull()
+        $comments = Comment::where('status',1)->whereNull('parent_id')->get();
         return view('ShowPost',compact('post','comments'));
     }
 

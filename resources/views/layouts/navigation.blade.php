@@ -15,21 +15,32 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @hasanyrole('admin|writer')
                     <x-nav-link :href="route('newpost.show')" :active="request()->routeIs('newpost.show')">
                         {{ __('New Post') }}
                     </x-nav-link>
                     <x-nav-link :href="route('editpost')" :active="request()->routeIs('editpost')">
                         {{ __('Edit Post') }}
                     </x-nav-link>
+                    @endhasanyrole
+                    @hasanyrole('admin')
                     <x-nav-link :href="route('managecats')" :active="request()->routeIs('managecats')">
                         {{ __('Manage Categories') }}
                     </x-nav-link>
+                    @endhasanyrole
+                    @hasanyrole('admin')
+                    <x-nav-link :href="route('managecomments')" :active="request()->routeIs('managecomments')">
+                        {{ __('confirm Comments') }}
+                    </x-nav-link>
+                    @endhasanyrole
+                    @hasanyrole('admin|editor')
                     <x-nav-link :href="route('newpage')" :active="request()->routeIs('newpage')">
                         {{ __('New Page') }}
                     </x-nav-link>
                     <x-nav-link :href="route('editpage')" :active="request()->routeIs('editpage')">
                         {{ __('Edit Page') }}
                     </x-nav-link>
+                    @endhasanyrole
                 </div>
             </div>
 

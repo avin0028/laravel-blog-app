@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\ManageComments;
 use App\Http\Controllers\admin\RegisteruserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoryController;
@@ -38,6 +39,10 @@ Route::get('/newpage',[PagesController::class,'show'])->middleware('role:editor|
 Route::post('/newpage',[PagesController::class,'store'])->middleware('role:editor|admin','auth')->name('newpage.store');
 Route::get('/editpage',[PagesController::class,'editpage'])->middleware('role:editor|admin','auth')->name('editpage');
 Route::post('/editpage',[PagesController::class,'editthepage'])->middleware('role:editor|admin','auth')->name('editpage.do');
+Route::get('/managecoms',[ManageComments::class,'show'])->middleware('role:admin')->name('managecomments');
+Route::post('/managecoms/{comment}',[ManageComments::class,'action'])->middleware('role:admin')->name('actioncomment');
+
+
 
 });
 Route::get('posts',[PostsController::class,'showposts'])->name('showposts');
