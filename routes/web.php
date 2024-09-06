@@ -19,15 +19,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/register',[RegisteredUserController::class, 'create'])->name('adminregister');
     Route::post('/register',[RegisteredUserController::class, 'store'])->name('adminregister.store');
 
-    Route::get('/registeruser',[RegisteruserController::class, 'show'])->name('registeruser.show');
-    Route::post('/registeruser',[RegisteruserController::class, 'store'])->name('registeruser.store');
 
 })->middleware(['role:admin','auth']);
 
 Route::prefix('dashboard')->group(function (){
 Route::get('/', function () {
     return view('dashboard');
-})->name('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|editor|writer','auth')->name('newpost.show');
 Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer','auth'])->name('newpost.store');
@@ -41,7 +39,8 @@ Route::get('/editpage',[PagesController::class,'editpage'])->middleware('role:ed
 Route::post('/editpage',[PagesController::class,'editthepage'])->middleware('role:editor|admin','auth')->name('editpage.do');
 Route::get('/managecoms',[ManageComments::class,'show'])->middleware('role:admin')->name('managecomments');
 Route::post('/managecoms/{comment}',[ManageComments::class,'action'])->middleware('role:admin')->name('actioncomment');
-
+Route::get('/registeruser',[RegisteruserController::class, 'show'])->name('registeruser.show');
+Route::post('/registeruser',[RegisteruserController::class, 'store'])->name('registeruser.store');
 
 
 });

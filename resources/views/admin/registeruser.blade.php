@@ -1,4 +1,11 @@
-<x-guest-layout>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Register a User') }}
+        </h2>
+    </x-slot>
+    <div class="w-1/2 mx-auto ">
+
     <form method="POST" action="{{ route('registeruser.store') }}">
         @csrf
         @php
@@ -44,4 +51,5 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+    </div>
+</x-app-layout>

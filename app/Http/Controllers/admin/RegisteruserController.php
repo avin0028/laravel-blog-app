@@ -17,7 +17,7 @@ class RegisteruserController extends Controller
         return view('admin.registeruser');
     }
 
-    public function store(Request $request)
+    public function store(Request $request) :RedirectResponse
     {
 
 
@@ -34,9 +34,8 @@ class RegisteruserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        // event(new Registered($user));
-        $user->assignRole(['viewer']);
-        // return 'user created';
-
+        $user->assignRole([$request->role]);
+        event(new Registered($user));
+        return redirect()->back();
     }
 }   

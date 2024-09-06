@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @hasanyrole('admin')
+                    <x-nav-link :href="route('registeruser.show')" :active="request()->routeIs('newpost.show')">
+                        {{ __('Register User') }}
+                    </x-nav-link>
+                    @endhasanyrole
                     @hasanyrole('admin|writer')
                     <x-nav-link :href="route('newpost.show')" :active="request()->routeIs('newpost.show')">
                         {{ __('New Post') }}
@@ -33,6 +38,7 @@
                         {{ __('confirm Comments') }}
                     </x-nav-link>
                     @endhasanyrole
+                    
                     @hasanyrole('admin|editor')
                     <x-nav-link :href="route('newpage')" :active="request()->routeIs('newpage')">
                         {{ __('New Page') }}
