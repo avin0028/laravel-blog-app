@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @hasanyrole('admin')
-                    <x-nav-link :href="route('registeruser.show')" :active="request()->routeIs('newpost.show')">
+                    <x-nav-link :href="route('registeruser.show')" :active="request()->routeIs('registeruser.show')">
                         {{ __('Register User') }}
                     </x-nav-link>
                     @endhasanyrole
