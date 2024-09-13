@@ -23,33 +23,53 @@ Route::prefix('admin')->group(function () {
 })->middleware(['role:admin','auth']);
 
 Route::prefix('dashboard')->group(function (){
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+    Route::get('/', function () {
+                return view('dashboard');
+    })->middleware('auth')->name('dashboard');
 
-Route::get('/newpost',[PostsController::class,'show'])->middleware('role:admin|editor|writer','auth')->name('newpost.show');
-Route::post('/newpost',[PostsController::class,'store'])->middleware(['role:admin|editor|writer','auth'])->name('newpost.store');
-Route::get('/editpost',[PostsController::class,'editpost'])->middleware(['role:admin|editor|writer','auth'])->name('editpost');
-Route::post('/editpost',[PostsController::class,'editthepost'])->middleware(['role:admin|editor|writer','auth'])->name('editpost.do');
-Route::get('/managecategories',[CategoryController::class,'show'])->middleware('role:admin|editor','auth')->name('managecats');
-Route::post('/managecategories',[CategoryController::class,'action'])->middleware('role:admin|editor','auth')->name('cataction');
-Route::get('/newpage',[PagesController::class,'show'])->middleware('role:editor|admin','auth')->name('newpage');
-Route::post('/newpage',[PagesController::class,'store'])->middleware('role:editor|admin','auth')->name('newpage.store');
-Route::get('/editpage',[PagesController::class,'editpage'])->middleware('role:editor|admin','auth')->name('editpage');
-Route::post('/editpage',[PagesController::class,'editthepage'])->middleware('role:editor|admin','auth')->name('editpage.do');
-Route::get('/managecoms',[ManageComments::class,'show'])->middleware('role:admin')->name('managecomments');
-Route::post('/managecoms/{comment}',[ManageComments::class,'action'])->middleware('role:admin')->name('actioncomment');
-Route::get('/registeruser',[RegisteruserController::class, 'show'])->name('registeruser.show');
-Route::post('/registeruser',[RegisteruserController::class, 'store'])->name('registeruser.store');
+    Route::controller(PostsController::class)->group(function () {
+        Route::get('/newpost','show')->name('newpost.show');
+        Route::post('/newpost','store')->name('newpost.store');
+        Route::get('/editpost','editpost')->name('editpost');
+        Route::post('/editpost','editthepost')->name('editpost.do');
+    
+    })->middleware('role:admin|editor|writer','auth');
 
+    Route::controller(CategoryController::class)->group(function (){
+        Route::get('/managecategories','show')->name('managecats');
+        Route::post('/managecategories','show')->name('cataction');
+    })->middleware('role:admin|editor','auth');
 
+    Route::controller(PagesController::class)->group(function(){
+        Route::get('/newpage','show')->name('newpage');
+        Route::post('/newpage','store')->name('newpage.store');
+        Route::get('/editpage','editpage')->name('editpage');
+        Route::post('/editpage','editthepage')->name('editpage.do');
+    })->middleware('role:editor|admin','auth');
+
+    Route::controller(ManageComments::class)->group(function(){
+        Route::get('/managecoms','show')->name('managecomments');
+        Route::post('/managecoms/{comment}','action')->name('actioncomment');
+    })->middleware('role:admin');
+
+    Route::controller(RegisteruserController::class)->group(function(){
+        Route::get('/registeruser')->name('registeruser.show');
+        Route::post('/registeruser')->name('registeruser.store');
+    })->middleware('role:admin');
 });
-Route::get('posts',[PostsController::class,'showposts'])->name('showposts');
-Route::get('posts/{url}',[PostsController::class,'showpost'])->name('showpost');
-Route::post('posts/{url}',[PostsController::class,'delete'])->name('showpost.delete');
-Route::get('pages/',[PagesController::class,'showpages'])->name('showpages');
-Route::get('pages/{url}',[PagesController::class,'showpage'])->name('showpage');
-Route::post('pages/{url}',[PagesController::class,'delete'])->name('showpage.delete');
+
+Route::controller(PostsController::class)->group(function(){
+    Route::get('posts','showposts')->name('showposts');
+    Route::get('posts/{url}','showpost')->name('showpost');
+    Route::post('posts/{url}','delete')->name('showpost.delete');
+});
+
+Route::controller(PagesController::class)->group(function(){
+    Route::get('pages/','showpages')->name('showpages');
+    Route::get('pages/{url}','showpage')->name('showpage');
+    Route::post('pages/{url}','delete')->name('showpage.delete');
+});
+
 Route::post('comments',[CommentsController::class,'store'])->middleware('auth')->name('newcomment');
 
 Route::middleware('auth')->group(function () {
