@@ -26,8 +26,9 @@ class PostsController extends Controller
     public function editpost(Request $request){
         $url = $request->query('url');
         if(!$url){
-
-            return view('dashboard.editpost');
+            $posts = Post::all()
+;
+            return view('dashboard.editpost',compact('posts'));
         }
         $post = Post::where('url',$url)->get();
         // dd($post[0]);
