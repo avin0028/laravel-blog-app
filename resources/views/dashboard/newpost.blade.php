@@ -44,7 +44,7 @@
         <div class="mt-4">
             <x-input-label for="category" :value="__('Select Category')" />
 
-            <select class="bg-[#1F2937] text-white" name="category">
+            <select class="bg-[#1F2937] text-white" name="category" multiple>
               @foreach($categories as $item)
               <option value="{{ $item->id }}">{{ $item->name }}</option>
               @endforeach

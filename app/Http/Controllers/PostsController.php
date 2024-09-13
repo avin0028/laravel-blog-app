@@ -63,10 +63,10 @@ class PostsController extends Controller
         $post->author_id = Auth::id();
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->category_id = $request->category;
         $post->tags = $request->tags;
         $post->status = $request->status;
         $post->url = $request->url;
+        $post->categories()->attach($request->categories);
         $post->save();
         return redirect()->route('showpost', ['url' => $request->url]);
 

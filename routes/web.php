@@ -37,7 +37,7 @@ Route::prefix('dashboard')->group(function (){
 
     Route::controller(CategoryController::class)->group(function (){
         Route::get('/managecategories','show')->name('managecats');
-        Route::post('/managecategories','show')->name('cataction');
+        Route::post('/managecategories','action')->name('cataction');
     })->middleware('role:admin|editor','auth');
 
     Route::controller(PagesController::class)->group(function(){
