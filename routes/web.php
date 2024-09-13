@@ -10,10 +10,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
+Route::redirect('/', '/posts');
 
 Route::prefix('admin')->group(function () {
     Route::get('/register',[RegisteredUserController::class, 'create'])->name('adminregister');
