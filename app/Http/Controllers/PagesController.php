@@ -40,12 +40,14 @@ class PagesController extends Controller{
     public function editpage(Request $request){
         $url = $request->query('url');
         if(!$url){
+            $pages = Page::all();
 
-            return view('dashboard.editpage');
+            return view('dashboard.editpage',compact('pages'));
+        }else{
+
+            $page = Page::where('url',$url)->get();
+            return view('dashboard.editpage',compact('page'));
         }
-        $page = Page::where('url',$url)->get();
-        // dd($post[0]);
-        return view('dashboard.editpage',compact('page'));
     }
     public function editthepage(Request $request){
 

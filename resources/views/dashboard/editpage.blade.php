@@ -6,19 +6,27 @@
     </x-slot>
     <div  class="w-1/2 mx-auto text-white ">
 
-    @if (!request()->query('url'))
-    <form method="GET">
-        <div class="mt-4">
-            <x-input-label for="url" :value="__('Provide the page url')" />
-            <x-text-input id="url" class="block mt-1 w-2/5 h-10" type="text" name="url" :value="old('url')" required autofocus autocomplete="tags" />
-            <x-input-error :messages="$errors->get('url')" class="mt-2" />
-        </div>
+  
+        @if (!request()->query('url'))
+        <table class="min-w-full  divide-y bg-[#1F2937]>
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                </tr>
+            </thead>
+            <tbody class="bg-[#1F2937] divide-y divide-gray-200">
+                @foreach($pages as $page)
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $page->title }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a href="{{ route('editpost', ['url'=>$page->url]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-        <x-primary-button class="mt-4 w-24">
-            {{ __('Submit') }}
-        </x-primary-button>
-        
-    </form>
     @else 
      <form class="flex-col flex justify-center " method="POST" action="{{ route('editpage.do') }}">
         @csrf
