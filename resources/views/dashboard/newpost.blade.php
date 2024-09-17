@@ -42,20 +42,15 @@
         </div>
 
         <div class="mt-4">
-            <x-input-label for="category" :value="__('Select Category')" />
+            <x-input-label for="category" :value="__('Select Categories')" />
 
-            <select class="bg-[#1F2937] text-white" name="category" multiple>
-              @foreach($categories as $item)
-              <option value="{{ $item->id }}">{{ $item->name }}</option>
-              @endforeach
-            </select>
+            @foreach($categories as $item)
+            <label class="text-white">
+                <input type="checkbox" name="category[]" value="{{ $item->id }}">
+                {{ $item->name }}
+            </label>
+        @endforeach
 
-            {{-- @if ($errors->has('dropdown'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('dropdown') }}</strong>
-                </span>
-            @endif
-        </div> --}}
     </div>
     @if ($errors->any())
     <div class="text-white alert alert-danger">
