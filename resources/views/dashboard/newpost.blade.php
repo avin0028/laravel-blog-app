@@ -42,7 +42,7 @@
         </div>
 
         <div class="mt-4">
-            <x-input-label for="category" :value="__('Select Categories')" />
+            <x-input-label for="category" :value="__('Select Categories:')" />
 
             @foreach($categories as $item)
             <label class="text-white">

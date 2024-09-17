@@ -11,7 +11,8 @@ class CategoryController extends Controller
 {
 
  public function show(Request $request){
-    return view('dashboard.managecategory');
+   $categories = Category::all();
+   return view('dashboard.managecategory',compact('categories'));
  }
  public function action(Request $request):RedirectResponse
  {
@@ -23,6 +24,7 @@ class CategoryController extends Controller
       $request->validate(['add'=> ['required','max:25','string']]);
    $category = new Category();
    $category->name = $request->add;
+   $category->parent_id = $request->parent_id;
    $category->save();
    }
    return redirect()->route('managecats');

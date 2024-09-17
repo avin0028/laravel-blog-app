@@ -13,24 +13,49 @@
             <x-text-input id="add" class="block mt-1 w-2/5 h-10" type="text" name="add" :value="old('add')" required autofocus autocomplete="category" />
             <x-input-error :messages="$errors->get('add')" class="mt-2" />
         </div>
+        <select class="bg-[#1F2937]" name="parent_id">
+            <option value="">Select Parent Category</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
 
         <x-primary-button class="mt-4 w-24">
             {{ __('add category') }}
         </x-primary-button>
     </form>
 
-    <form action="{{route('cataction')}}" method="POST">
-        @csrf
+    <table class="min-w-full  divide-y bg-[#1F2937]>
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Parent Name</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
 
-        <div class="mt-4">
-            <x-input-label for="delete" :value="__('Provide the category name to delete ')" />
-            <x-text-input id="delete" class="block mt-1 w-2/5 h-10" type="text" name="delete" :value="old('delete')" required autofocus autocomplete="category" />
-            <x-input-error :messages="$errors->get('delete')" class="mt-2" />
-        </div>
+            </tr>
+        </thead>
+        <tbody class="bg-[#1F2937] divide-y divide-gray-200">
+            @foreach($categories as $category)
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $category->name }}</td>
+                    @php
+                        // dd($category->parent);
+                    @endphp
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">  {{$category->parent->name ?? 'NO PARENT'}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium"> 
+                        <form action="{{route('cataction')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="delete" value="{{$category->name}}"/>
+                            <x-primary-button class="mt-4 w-24">
+                                {{ __('delete category') }}
+                            </x-primary-button>
+                        </form>
+                    </td>
 
-        <x-primary-button class="mt-4 w-24">
-            {{ __('delete category') }}
-        </x-primary-button>
-    </form>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
     </div>
 </x-app-layout>
