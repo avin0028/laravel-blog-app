@@ -15,10 +15,12 @@ class CategoryController extends Controller
  }
  public function action(Request $request):RedirectResponse
  {
-   if($request->delete){
+    if($request->delete){
+      $request->validate(['delete'=> ['required','max:25','string']]);
 
       Category::where('name',$request->delete)->delete();
    }else{
+      $request->validate(['add'=> ['required','max:25','string']]);
    $category = new Category();
    $category->name = $request->add;
    $category->save();

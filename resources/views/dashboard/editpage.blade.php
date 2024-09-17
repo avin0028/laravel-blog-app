@@ -20,7 +20,7 @@
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $page->title }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('editpost', ['url'=>$page->url]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <a href="{{ route('editpage', ['url'=>$page->url]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                         </td>
                     </tr>
                 @endforeach

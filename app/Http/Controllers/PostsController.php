@@ -37,6 +37,11 @@ class PostsController extends Controller
     }
 
     public function editthepost(Request $request):RedirectResponse{
+        $request->validate([
+            'title'=> ['required','max:25','string'],
+            'content'=>['required','max:256','string'],
+            'tags'=>['string','max:50']
+        ]);
      Post::where('url',$request->url)->update([
             'title' => $request->title,
             'content'=> $request->content,
