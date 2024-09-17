@@ -50,8 +50,8 @@ Route::prefix('dashboard')->group(function (){
     })->middleware('role:admin');
 
     Route::controller(RegisteruserController::class)->group(function(){
-        Route::get('/registeruser')->name('registeruser.show');
-        Route::post('/registeruser')->name('registeruser.store');
+        Route::get('/registeruser','show')->name('registeruser.show');
+        Route::post('/registeruser','store')->name('registeruser.store');
     })->middleware('role:admin');
 });
 
